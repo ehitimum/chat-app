@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const router = express.Router();
-const mysql = require("mysql");
+const db = require("./utils/database");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
@@ -29,22 +29,8 @@ app.listen(9992, function check(err) {
   else console.log("started");
 });
 
-// Create a MySQL connection
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "chat",
-});
 
-// Connect to MySQL database
-db.connect((err) => {
-  if (err) {
-    console.error("error connecting: " + err.stack);
-    return;
-  }
-  console.log("connected as id " + db.threadId);
-});
+
 
 app.post("/login", (req, res) => {
   const email = req.body.email;
