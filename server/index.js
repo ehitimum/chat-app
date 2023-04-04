@@ -5,7 +5,7 @@ const cors = require("cors");
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const authRouter = require('./utils/auth');
-
+const regRouter = require('./utils/registerApi');
 app.use(
   cors({
     origin: "http://localhost:3000",
@@ -21,6 +21,8 @@ app.use(session({
 }));
 
 app.use('/login', authRouter);
+
+app.use('/register', regRouter );
 
 app.listen(9992, function check(err) {
   if (err) console.log("error");
