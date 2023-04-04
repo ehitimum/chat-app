@@ -2,5 +2,6 @@
     "files.associations": {
         "*.js": "javascriptreact",
         "*.ts": ""
-    }
+    },
+    "ProjectTree.withComment": true
 }
