@@ -10,7 +10,7 @@ const db = require("./database");
 router.post('/', async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    console.log(`Received email: ${email} and Password: ${password} and name: ${username}`);
+    // console.log(`Received email: ${email} and Password: ${password} and name: ${username}`);
     const existingUserQuery = `SELECT * FROM user WHERE email = '${email}'`;
     db.query(existingUserQuery, async (err, result) => {
       if (err) {
@@ -20,8 +20,8 @@ router.post('/', async (req, res) => {
       if (result.length > 0) {
         return res.status(400).json({ message: 'Email already registered' });
       }
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const newUserQuery = `INSERT INTO user (username, email, password) VALUES ('${username}', '${email}', '${hashedPassword}')`;
+    //   const hashedPassword = await bcrypt.hash(password, 10);
+      const newUserQuery = `INSERT INTO user (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       db.query(newUserQuery, (err, result) => {
         if (err) {
           console.error(err);

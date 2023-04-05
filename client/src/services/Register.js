@@ -10,20 +10,21 @@ export const Register = (props) => {
     const [password, setPass] = useState('');
     const [error, setError] = useState('');
 
-  const handleSubmit = async () => {
-    const response = await fetch('http://localhost:9992/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username, email, password })
-    });
 
-    const data = await response.json();
-    setError(`Server response: ${data.message}`);
-    console.log(data.token)
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:9992/register', {
+        username,
+        email,
+        password,
+      });
+      console.log(response.data);
+    } catch (err) {
+      setError(err.response.data.message);
+    }
   };
-  
+
 
     return (
         <CSSTransition
